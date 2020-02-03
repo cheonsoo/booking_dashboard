@@ -59,10 +59,17 @@ app.get("/api/schedules", function(req, res) {
   })
   .then(function(roomList) {
     roomList.forEach(function(item) {
-      item.time_start = `${new Date(item.startDate).getHours()}:${new Date(item.startDate).getMinutes()}`;
-      item.time_start = item.time_start.length === 4 ? `${item.time_start}0` : item.time_start;
-      item.time_end = `${new Date(item.endDate).getHours()}:${new Date(item.endDate).getMinutes()}`;
-      item.time_end = item.time_end.length === 4 ? `${item.time_end}0` : item.time_end;
+      let startHours = new Date(item.startDate).getHours();
+          startHours = startHours > 10 ? startHours : `0${startHours}`;
+      let startMins = new Date(item.startDate).getMiniues();
+          startMins = startMins > 10 ? startMins : `0${startMins}`;
+      item.time_start = `${startHours}:${startMins}`;
+
+      let endHours = new Date(item.endDate).getHours();
+          endHours = endHours > 10 ? endHours : `0${endHours}`;
+      let endMins = new Date(item.endDate).getMiniues();
+          endMins = endMins > 10 ? endMins : `0${endMins}`;
+      item.time_end = `${endHours}:${endMins}`;
     });
     return roomList;
   })
