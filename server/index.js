@@ -60,15 +60,15 @@ app.get("/api/schedules", function(req, res) {
   .then(function(roomList) {
     roomList.forEach(function(item) {
       let startHours = new Date(item.startDate).getHours();
-          startHours = startHours > 10 ? startHours : `0${startHours}`;
+          startHours = startHours >= 10 ? startHours : `0${startHours}`;
       let startMins = new Date(item.startDate).getMinutes();
-          startMins = startMins > 10 ? startMins : `0${startMins}`;
+          startMins = startMins >= 10 ? startMins : `0${startMins}`;
       item.time_start = `${startHours}:${startMins}`;
 
       let endHours = new Date(item.endDate).getHours();
-          endHours = endHours > 10 ? endHours : `0${endHours}`;
+          endHours = endHours >= 10 ? endHours : `0${endHours}`;
       let endMins = new Date(item.endDate).getMinutes();
-          endMins = endMins > 10 ? endMins : `0${endMins}`;
+          endMins = endMins >= 10 ? endMins : `0${endMins}`;
       item.time_end = `${endHours}:${endMins}`;
     });
     return roomList;
